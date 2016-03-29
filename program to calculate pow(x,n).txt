@@ -1,0 +1,44 @@
+/*
+Date: 29-March-2016
+Divide and Conquer
+Find the power ex 2^5
+Time: O(log n)
+Space: O(log n) // recusion stack
+Here it is covers critical test cases like that of -ve no.'s too.
+Algo Link: http://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/
+*/
+#include <iostream>
+
+using namespace std;
+long long int pow(int ,int );
+int main()
+{
+    int base,exponent,testCase;
+    cin>>testCase;
+    while(testCase--)
+    {
+        cin>>base>>exponent;
+        if(exponent==0)
+            cout<<"1"<<endl;
+        else if(exponent<0)
+            cout<<1.0/pow(base,-exponent)<<endl;
+        else
+            cout<<pow(base,exponent)<<endl;
+    }
+    return 0;
+}
+long long int pow(int base,int exponent)
+{
+    if(exponent==1)
+        return base;
+    if(exponent%2==0)
+    {
+        long long int temp=pow(base,exponent/2);
+        return temp*temp;
+    }
+    else
+    {
+        long long int temp=pow(base,exponent/2);
+        return base*temp*temp;
+    }
+}
