@@ -1,0 +1,55 @@
+/*
+Date:30-March-2016
+Divide and Conquer
+Problem: Get the median of 
+two sorted arrays of same size arrays.
+Time: O(log n)
+Space: O(log n) //recursion stack
+Algo Link: http://www.geeksforgeeks.org/median-of-two-sorted-arrays/
+*/
+
+#include <iostream>
+using namespace std;
+double getMedian(int *arr,int n);
+double median(int *a1,int *a2,int size);
+int max(int p,int q)
+{
+    if(p>=q)    return p;
+    else    return q;
+}
+int min(int p,int q)
+{
+    if(p>=q)    return q;
+    else    return p;
+}
+int main()
+{
+    int n,i;
+    int a1[1000];
+    int a2[1000];
+    cin>>n;
+    for(i=0;i<n;i++)
+        cin>>a1[i];
+    for(i=0;i<n;i++)
+        cin>>a2[i];
+    cout<<median(a1,a2,n-1)<<endl;
+    return 0;
+}
+double median(int *a1,int *a2,int size)
+{
+    if(size==0)    return (a1[0]+a2[0])/2;
+    if(size==1)    return (max(a1[0],a2[0])+min(a1[1],a2[1]))/2;
+    double a=getMedian(a1,size);
+    double b=getMedian(a2,size);
+    if(a<b)
+        return median(a1+size/2,a2,size/2);
+    else
+        return median(a2+size/2,a1,size/2);
+}
+double getMedian(int *arr,int n)
+{
+    if(n%2==0)
+        return arr[n/2];
+    else
+        return (arr[n/2]+arr[n/2+1])/2;
+}
